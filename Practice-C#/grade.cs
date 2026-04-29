@@ -2,7 +2,7 @@ using System;
 
 class GradeProgram
 {
-    static void Main()
+    static void MainGRade()
     {
         Console.Write("Enter your grade Percentage: ");
         string input=Console.ReadLine();
