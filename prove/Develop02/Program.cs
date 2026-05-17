@@ -5,6 +5,7 @@ class Program
     {
         Journal journal = new Journal();
 
+        // List of prompts to choose from
         List<string> prompts = new List<string>();
         prompts.Add("Who was the most interesting person I interacted with today?");
         prompts.Add("What was the best part of my day?");
@@ -34,17 +35,35 @@ class Program
 
             if (choice == "1")
             {
-                int index = random.Next(prompts.Count);
-                string prompt = prompts[index];
 
-                Console.WriteLine(prompt);
-                Console.Write("> ");
-                string response = Console.ReadLine();
+                string prompt = "";
+                string response = "";
+                while (true)
+                {
+                    int index = random.Next(prompts.Count);
+                    prompt = prompts[index];
+                    Console.WriteLine(prompt);
+                    Console.WriteLine("(Type 'skip' if you want a different prompt)");
+                    Console.Write("> ");
+                    response = Console.ReadLine();
 
+                    if (response != "skip")
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Okay, here's a different one...");
+                    Console.WriteLine();
+                }
+
+                Console.Write("In one word, how would you describe your mood today? ");
+                string mood = Console.ReadLine();
+
+                // Build the entry
                 Entry entry = new Entry();
                 entry._date = DateTime.Now.ToString("ddd M/d/yyyy");
                 entry._prompt = prompt;
                 entry._response = response;
+                entry._mood = mood;
 
                 journal.AddEntry(entry);
                 Console.WriteLine("Entry saved.");

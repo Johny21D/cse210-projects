@@ -27,7 +27,7 @@ class Journal
         {
             foreach (Entry entry in _entries)
             {
-                outputFile.WriteLine($"{entry._date}~|~{entry._prompt}~|~{entry._response}");
+                outputFile.WriteLine($"{entry._date}~|~{entry._mood}~|~{entry._prompt}~|~{entry._response}");
             }
         }
         Console.WriteLine("Journal saved.");
@@ -50,8 +50,9 @@ class Journal
 
             Entry entry = new Entry();
             entry._date = parts[0];
-            entry._prompt = parts[1];
-            entry._response = parts[2];
+            entry._mood = parts[1];
+            entry._prompt = parts[2];
+            entry._response = parts[3];
 
             _entries.Add(entry);
         }
