@@ -1,16 +1,26 @@
 using System;
-
 class Program
 {
     static void Main(string[] args)
     {
         Journal journal = new Journal();
-        PromptGenerator prompts = new PromptGenerator();
-        bool running = true;
+
+        List<string> prompts = new List<string>();
+        prompts.Add("Who was the most interesting person I interacted with today?");
+        prompts.Add("What was the best part of my day?");
+        prompts.Add("How did I see the hand of the Lord in my life today?");
+        prompts.Add("What was the strongest emotion I felt today?");
+        prompts.Add("If I had one thing I could do over today, what would it be?");
+        prompts.Add("What is something new I learned today?");
+        prompts.Add("What is one thing I am grateful for today?");
+        prompts.Add("What is one small win I had today?");
+
+        Random random = new Random();
 
         Console.WriteLine("Welcome to the Journal Program!");
 
-        while (running)
+        string choice = "";
+        while (choice != "5")
         {
             Console.WriteLine();
             Console.WriteLine("Please select one of the following choices:");
@@ -18,75 +28,52 @@ class Program
             Console.WriteLine("2. Display");
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
-            Console.WriteLine("5. Search");
-            Console.WriteLine("6. Stats");
-            Console.WriteLine("7. Quit");
+            Console.WriteLine("5. Quit");
             Console.Write("What would you like to do? ");
+            choice = Console.ReadLine();
 
-            string input = Console.ReadLine();
-            int choice;
-            if (!int.TryParse(input, out choice))
+            if (choice == "1")
             {
-                Console.WriteLine("Please enter a number from 1 to 7.");
-                continue;
+                int index = random.Next(prompts.Count);
+                string prompt = prompts[index];
+
+                Console.WriteLine(prompt);
+                Console.Write("> ");
+                string response = Console.ReadLine();
+
+                Entry entry = new Entry();
+                entry._date = DateTime.Now.ToString("ddd M/d/yyyy");
+                entry._prompt = prompt;
+                entry._response = response;
+
+                journal.AddEntry(entry);
+                Console.WriteLine("Entry saved.");
             }
-
-            switch (choice)
+            else if (choice == "2")
             {
-                case 1:
-                    WriteNewEntry(journal, prompts);
-                    break;
-                case 2:
-                    journal.DisplayAll();
-                    break;
-                case 3:
-                    Console.Write("What is the filename? ");
-                    string loadName = Console.ReadLine();
-                    journal.LoadFromFile(loadName);
-                    break;
-                case 4:
-                    Console.Write("What is the filename? ");
-                    string saveName = Console.ReadLine();
-                    journal.SaveToFile(saveName);
-                    break;
-                case 5:
-                    Console.Write("Enter a keyword to search for: ");
-                    string keyword = Console.ReadLine();
-                    journal.Search(keyword);
-                    break;
-                case 6:
-                    journal.ShowStats();
-                    break;
-                case 7:
-                    running = false;
-                    Console.WriteLine("Goodbye!");
-                    break;
-                default:
-                    Console.WriteLine("Please enter a number from 1 to 7.");
-                    break;
+                Console.WriteLine($"You have {journal._entries.Count} entries:");
+                journal.DisplayAll();
+            }
+            else if (choice == "3")
+            {
+                Console.Write("What is the filename? ");
+                string filename = Console.ReadLine();
+                journal.LoadFromFile(filename);
+            }
+            else if (choice == "4")
+            {
+                Console.Write("What is the filename? ");
+                string filename = Console.ReadLine();
+                journal.SaveToFile(filename);
+            }
+            else if (choice == "5")
+            {
+                Console.WriteLine("Goodbye!");
+            }
+            else
+            {
+                Console.WriteLine("Please enter a number from 1 to 5.");
             }
         }
-    }
-
-    static void WriteNewEntry(Journal journal, PromptGenerator prompts)
-    {
-        string prompt = prompts.GetRandomPrompt();
-        Console.WriteLine(prompt);
-        Console.Write("> ");
-        string response = Console.ReadLine();
-
-        Console.Write("In one word, how would you describe your mood today? ");
-        string mood = Console.ReadLine();
-
-        Entry entry = new Entry();
-        entry.Date = DateTime.Now.ToShortDateString();
-        entry.PromptText = prompt;
-        entry.EntryText = response;
-        entry.Mood = mood;
-
-        journal.AddEntry(entry);
-        Console.WriteLine("Entry saved.");
-    }
-}
     }
 }
