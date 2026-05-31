@@ -7,7 +7,6 @@ class Program
 
         while (true)
         {
-            Console.Clear();
             Console.WriteLine();
             scripture.Display();
             Console.WriteLine();
@@ -23,8 +22,10 @@ class Program
 
             if (input == "quit")
                 break;
-
-            scripture.HideWords(3);
+            else if (input == "continue")
+                scripture.HideWords(3);
+            else
+                Console.WriteLine("Invalid input. type continue or type 'quit'.");
         }
     }
 }
