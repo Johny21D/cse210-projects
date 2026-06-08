@@ -6,7 +6,7 @@
 
 // Input validation only 'continue' or 'quit' are accepted, if user type different 
 //input, prompt them again until they enter right word what the prompt ask.
-
+using System;
 class Program
 {
     static void Main(string[] args)
@@ -26,15 +26,15 @@ class Program
                 break;
             }
 
-            Console.Write("Press Enter to continue or type 'quit' to exit: ");
+            Console.Write("Press enter to continue or type 'quit' to exit: ");
             string input = Console.ReadLine()?.Trim().ToLower();
 
             if (input == "quit")
                 break;
-            else if (input == "continue")
+            else if (input == "")
                 scripture.HideWords(3);
             else
-                Console.WriteLine("Invalid input. type continue or type 'quit'.");
+                Console.WriteLine("Invalid input. enter continue or type 'quit'.");
         }
     }
 }
