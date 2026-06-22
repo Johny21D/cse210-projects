@@ -4,32 +4,32 @@ class Program
 {
     static void Main(string[] args)
     {
+        Breathing breath = new Breathing();
+        Reflection reflect = new Reflection();
+        Listing list = new Listing();
 
         int choice = 0;
-    while (choice != 4)
+        while (choice != 4)
         {
             DisplayMenu();
             choice = int.Parse(Console.ReadLine());
 
             if (choice == 1)
             {
-                Breathing breath = new Breathing();
                 breath.Begin();
             }
             else if (choice == 2)
             {
-                Reflection reflect = new Reflection();
                 reflect.Begin();
             }
             else if (choice == 3)
             {
-                Listing list = new Listing();
                 list.Begin();
             }
         }
     }
 
-     static void DisplayMenu()
+    static void DisplayMenu()
     {
         Console.WriteLine("Menu Options:");
         Console.WriteLine("1. Start breathing activity");
