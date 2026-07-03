@@ -1,0 +1,4 @@
+8000
+SimpleGoal:Workout,1 hour,500,True
+EternalGoal:Go to sacrament every Sunday ,1 hour,1000
+CheckGoal:Go to the temple,Every 2 weeks,2000,500,2,2

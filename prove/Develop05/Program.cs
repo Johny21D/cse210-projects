@@ -1,3 +1,6 @@
+// EXCEEDING REQUIREMENT: Leveling system.
+// Every 1000 points the user goes up one level. The level is shown
+// in the menu, and a "LEVEL UP" message prints when crossing 1000
 using System;
 using System.Collections.Generic;
 using System.IO;
