@@ -2,22 +2,22 @@ namespace PickleballTracker
 {
     public class Player
     {
-        private string name;
-        private int playerId;
+        private string _name;
+        private int _playerId;
 
         public Player(string playerName, int id)
         {
-            name = playerName;
-            playerId = id;
+            _name = playerName;
+            _playerId = id;
         }
 
         public string GetName() 
         { 
-            return name; 
+            return _name; 
         }
         public int GetId() 
         { 
-            return playerId; 
-            }
+            return _playerId; 
+        }
     }
 }

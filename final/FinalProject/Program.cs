@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace PickleballTracker
 {
@@ -106,8 +107,8 @@ namespace PickleballTracker
                     string date = PromptForDate();
                     Score score = PromptForScore();
                     league.RecordMatch(new DoublesMatch(date, score,
-                                       new Team(a, b),
-                                       new Team(c, d)));
+                                                        new Team(a, b),
+                                                        new Team(c, d)));
                     Console.WriteLine("Doubles match recorded.");
                 }
                 else if (choice == 4)

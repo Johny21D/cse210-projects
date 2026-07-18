@@ -4,23 +4,17 @@ namespace PickleballTracker
 {
     public abstract class Match
     {
-        private string date;
-        private Score score;
+        private string _date;
+        private Score _score;
 
         protected Match(string matchDate, Score matchScore)
         {
-            date = matchDate;
-            score = matchScore;
+            _date = matchDate;
+            _score = matchScore;
         }
 
-        public string GetDate() 
-        { 
-            return date;
-        }
-        public Score GetScore() 
-        { 
-            return score; 
-        }
+        public string GetDate() { return _date; }
+        public Score GetScore() { return _score; }
 
         public abstract List<Player> GetWinners();
         public abstract List<Player> GetParticipants();

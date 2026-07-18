@@ -4,36 +4,63 @@ namespace PickleballTracker
 {
     public class StatTracker
     {
-        private League league;
+        private League _league;
 
         public StatTracker(League theLeague)
         {
-            league = theLeague;
+            _league = theLeague;
         }
 
         public int GetWins(Player p)
         {
-            return 0;
+            int wins = 0;
+            foreach (Match m in _league.GetMatches())
+            {
+                if (m.GetWinners().Contains(p)) wins++;
+            }
+            return wins;
         }
 
         public int GetLosses(Player p)
         {
-            return 0;
+            int losses = 0;
+            foreach (Match m in _league.GetMatches())
+            {
+                if (m.GetParticipants().Contains(p) &&!m.GetWinners().Contains(p))
+                {
+                    losses++;
+                }
+            }
+            return losses;
         }
 
         public double GetWinPct(Player p)
         {
-            return 0.0;
+            int wins = GetWins(p);
+            int total = wins + GetLosses(p);
+            if (total == 0) return 0.0;
+            return 100.0 * wins / total;
         }
 
         public string GetHeadToHead(Player a, Player b)
         {
-            return "";
+            int aWins = 0, bWins = 0;
+            foreach (Match m in _league.GetMatches())
+            {
+                if (m.AreOpponents(a, b))
+                {
+                    if (m.GetWinners().Contains(a)) aWins++;
+                    else if (m.GetWinners().Contains(b)) bWins++;
+                }
+            }
+            return a.GetName() + " " + aWins + " - " + bWins + " " + b.GetName();
         }
 
         public void PrintPlayerReport(Player p)
         {
-            Console.WriteLine(p.GetName() );
+            Console.WriteLine(p.GetName() + ": "
+                + GetWins(p) + "W - " + GetLosses(p) + "L  ("
+                + GetWinPct(p).ToString("F1") + "%)");
         }
     }
 }
